@@ -3,11 +3,24 @@ import java.util.Scanner;
 
 public class Humano extends Jogador{
     public Scanner entrada = new Scanner(System.in);
+    private int pontos;
     
-    public Humano(int jogador){
+    public int getPontos() {
+		return pontos;
+	}
+
+	public void setPontos(int pontos) {
+		this.pontos = pontos;
+	}
+
+	public Humano(int jogador){
         super(jogador);
         this.jogador = jogador;
-        System.out.println("Jogador 'Humano' criado!");
+        this.pontos=0;
+    }
+    
+    public void maisPonto() {
+    	this.pontos++;
     }
     
     @Override

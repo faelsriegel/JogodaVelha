@@ -4,52 +4,35 @@ import java.util.Scanner;
 public class Jogo {
     private Tabuleiro tabuleiro;
     private int rodada=1, vez=1;
-    private Jogador jogador1;
-    private Jogador jogador2;
+    private Humano jogador1;
+    private Humano jogador2;
     public Scanner entrada = new Scanner(System.in);
 
     
     public Jogo(){
         tabuleiro = new Tabuleiro();
-        iniciarJogadores();
-        
-        while( Jogar() );
+        jogador1 = new Humano(1);
+        jogador2 = new Humano(2);
+     
     }
     
-    public void iniciarJogadores(){
-        System.out.println("Quem vai ser o Jogador 1 ?");
-        if(escolherJogador() == 1)
-            this.jogador1 = new Humano(1);
-        else
-            this.jogador1 = new Computador(1);
-        
-        System.out.println("----------------------");
-        System.out.println("Quem vai ser o Jogador 2 ?");
-        
-        if(escolherJogador() == 1)
-            this.jogador2 = new Humano(2);
-        else
-            this.jogador2 = new Computador(2);
-        
-    }
-    
-    public int escolherJogador(){
-        int opcao=0;
-        
-        do{
-            System.out.println("\n[1] Humano");
-            System.out.println("[2] Computador\n");
-            System.out.print("Opção: ");
-            opcao = entrada.nextInt();
-            
-            if(opcao != 1 && opcao != 2)
-                System.out.println("Opção Inválida,Tente Novamente");
-        }while(opcao != 1 && opcao != 2);
-        
-        return opcao;
-    }
-    
-    public boolean Jogar(){
+    public Humano getJogador1() {
+		return jogador1;
+	}
+
+	public void setJogador1(Humano jogador1) {
+		this.jogador1 = jogador1;
+	}
+
+	public Humano getJogador2() {
+		return jogador2;
+	}
+
+	public void setJogador2(Humano jogador2) {
+		this.jogador2 = jogador2;
+	}
+
+	public boolean Jogar(){
         if(ganhou() == 0 ){
             System.out.println("----------------------");
             System.out.println("\nRodada "+rodada);
@@ -70,11 +53,14 @@ public class Jogo {
 
             return true;
         } else{
-            if(ganhou() == -1 )
+            if(ganhou() == -1) {
                 System.out.println("Jogador 1 Ganhou!");
-            else
+            	jogador1.maisPonto();
+            }
+            else {
                 System.out.println("Jogador 2 Ganhou!");
-            
+            	jogador2.maisPonto();
+            }
             return false;
         }
             
